@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search OMDBAPI</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container">
+        <h1>Search OMDB API</h1>
+        <div class="row">
+            <div class="col-xs-6">
+                <h2>Search</h2>
+                <input value="Star Wars" id="movieTitleTxt" class="form-control" placeholder="Avatar" />
+                <button id="searchMovieBtn" class="btn btn-primary btn-block"> Search Movie</button>
+
+                <h2>Search Results</h2>
+                <table id="searchResults" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Poster</th>
+                        <th>Title</th>
+                        <th>IMDB ID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+                <h2 id="detailsTitle">Title</h2>
+                <img id="detailsPoster"/>
+                Director: <span id="director"></span>
+                <h3>Plot</h3>
+                <p id="detailsPlot"></p>
+                <h3>Actors</h3>
+                <ul id="detailsActors">
+
+                </ul>
+            <div class="col-xs-6">
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

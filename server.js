@@ -21,4 +21,9 @@ app.get('/api/users', function(req, res) {
     res.json(users);
 });
 
+// get the app.js and pass it with an instance of app
+require("./public/experiments/server/express/omdb/get/server/app.js")(app);
+
+require("./public/experiments/server/express/omdb/post/server/app.js")(app);
+
 app.listen(port, ipaddress);
