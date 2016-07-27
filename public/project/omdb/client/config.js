@@ -12,7 +12,9 @@
                 templateUrl: "views/search/search.view.html"
             })
             .when("/login", {
-                templateUrl: "views/login/login.view.html"
+                templateUrl: "views/login/login.view.html",
+                controller: "LoginController",
+                controllerAs: "model"   // we want to scope the variables
             })
             .otherwise({
                 redirectTo: "/homr"
