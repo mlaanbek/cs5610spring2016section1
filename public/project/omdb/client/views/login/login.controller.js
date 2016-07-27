@@ -13,11 +13,19 @@
         }
         init();
 
+
+        /*
+        UserService.findUserByCredentials returns a promise that allows to register a function
+        in the .then part.
+         */
         function login(user) {
             UserService
                 .findUserByCredentials({
                     username: user.username,
                     password: user.password
+                })
+                .then(function (response) {
+                    console.log(response.data);
                 });
         }
     }
