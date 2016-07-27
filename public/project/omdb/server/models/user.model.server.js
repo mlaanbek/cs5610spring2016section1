@@ -1,3 +1,6 @@
+// load the mock data into a local variable
+var mock = require("./user.mock.json");
+
 module.exports = function () {
     var api = {
         findUserByCredentials: findUserByCredentials
@@ -5,6 +8,7 @@ module.exports = function () {
     return api;
 
     function findUserByCredentials(credentials) {
+        console.log(mock);
         console.log(credentials);
     }
 }
