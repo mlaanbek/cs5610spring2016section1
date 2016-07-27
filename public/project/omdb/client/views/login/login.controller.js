@@ -19,13 +19,20 @@
         in the .then part.
          */
         function login(user) {
+            if (!user) {
+                return;
+            }
+
             UserService
                 .findUserByCredentials({
                     username: user.username,
                     password: user.password
                 })
                 .then(function (response) {
-                    console.log(response.data);
+                    // if a user was found
+                    if (response.data) {
+                        UserService.setCurrentUser(response.data);
+                    }
                 });
         }
     }

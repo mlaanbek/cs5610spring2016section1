@@ -4,12 +4,19 @@
         .factory("UserService", UserService);
 
     // normally you would use $https but free version of openShift doesn't enable this
-    function UserService($http) {
+    // We use $rootScope to remember the user who has logged in (however, it's a temporary solution)
+    function UserService($http, $rootScope) {
         var api =  {
-            findUserByCredentials: findUserByCredentials
+            findUserByCredentials: findUserByCredentials,
+            setCurrentUser: setCurrentUser
         };
 
         return api;
+
+        function setCurrentUser(user) {
+            $rootScope.currentUser = user;
+            console.log($rootScope.currentUser);
+        }
 
         function findUserByCredentials(credentials) {
             return $http.post("/api/project/user", credentials);
