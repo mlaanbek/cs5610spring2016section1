@@ -1,2 +1,5 @@
 .idea
 node_modules
+angular-route.min.js
+angular.min.js
+jquery.min.js
