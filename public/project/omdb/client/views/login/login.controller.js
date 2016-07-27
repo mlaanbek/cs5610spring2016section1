@@ -3,7 +3,7 @@
         .module("OmdbApp")
         .controller("LoginController", LoginController);
 
-    function LoginController() {
+    function LoginController(UserService) {
         var vm = this;
 
         vm.login = login;
@@ -14,7 +14,11 @@
         init();
 
         function login(user) {
-            console.log(user);
+            UserService
+                .findUserByCredentials({
+                    username: user.username,
+                    password: user.password
+                });
         }
     }
 })();
