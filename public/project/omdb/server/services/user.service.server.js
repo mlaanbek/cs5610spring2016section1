@@ -8,7 +8,11 @@ module.exports = function(app, model) {
 
     function findUserByCredentials(req, res) {
         var credentials = req.body;
-        model.findUserByCredentials(credentials);
-        res.send(200);
+        var user = model.findUserByCredentials(credentials);
+
+        //res.send(200);
+
+        // stream user back to the client
+        res.json(user);
     }
 }
