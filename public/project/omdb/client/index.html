@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="OmdbApp">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>OMDB Project</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Omdb Application</h1>
+        <nav>
+            <ul class="nav nav-tabs">
+                <li><a href="#/home">Home</a></li>
+            </ul>
+        </nav>
+        <div ng-view></div>
+    </div>
+
+    <!-- local library files to enable IDE autocomplete-->
+    <script src="../../../js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="   crossorigin="anonymous"></script>
+    <script src="../../../js/angular.min.js"></script>
+    <script src="../../../js/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+</body>
+</html>
