@@ -8,8 +8,13 @@
     function UserService($http, $rootScope) {
         var api =  {
             findUserByCredentials: findUserByCredentials,
-            setCurrentUser: setCurrentUser
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser
         };
+
+        function getCurrentUser() {
+            return $rootScope.currentUser;
+        }
 
         return api;
 
