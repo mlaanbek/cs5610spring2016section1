@@ -4,7 +4,7 @@
 module.exports = function(app, model) {
 
     // an end-points that is listening for incoming patterns
-    app.post("/api/project/user", findUserByCredentials);
+    app.post("/api/project/login", findUserByCredentials);
 
     function findUserByCredentials(req, res) {
         var credentials = req.body;
