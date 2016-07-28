@@ -16,6 +16,9 @@
                 controller: "LoginController",
                 controllerAs: "model"   // we want to scope the variables
             })
+            .when("/profile", {
+                templateUrl: "views/profile/profile.view.html"
+            })
             .otherwise({
                 redirectTo: "/homr"
             });
