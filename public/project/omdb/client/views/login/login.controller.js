@@ -3,7 +3,7 @@
         .module("OmdbApp")
         .controller("LoginController", LoginController);
 
-    function LoginController(UserService) {
+    function LoginController(UserService, $location) {
         var vm = this;
 
         vm.login = login;
@@ -22,7 +22,6 @@
             if (!user) {
                 return;
             }
-
             UserService
                 .findUserByCredentials({
                     username: user.username,
@@ -32,6 +31,7 @@
                     // if a user was found
                     if (response.data) {
                         UserService.setCurrentUser(response.data);
+                        $location.url("/profile");
                     }
                 });
         }
