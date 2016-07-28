@@ -1,6 +1,20 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');            // to parse json from the body
+var cookieParser = require('cookie-parser');        // can parse cookies from the header
+var session = require('express-session');           // node.js module that provides high-level api to keep objects per session that initiated by cookies
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+/*
+ secret: requires a string, for example "this is my secret".
+ But to we don't want to post it publicly. So instead create and use an environment variable (stored in a computer)
+  process.env.VARIABLE_NAME
+  */
+//app.use(session({secret: process.env.PASSPORT_SECRET}));
+app.use(session({secret: "this is my secret"}));
+app.use(cookieParser());
 // configure where to fetch the static content: 'current directory'/public
 app.use(express.static(__dirname + '/public'));
 
