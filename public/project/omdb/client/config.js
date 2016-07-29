@@ -38,7 +38,7 @@
                 }
             })
             .otherwise({
-                redirectTo: "/homr"
+                redirectTo: "/home"
             });
     }
 
