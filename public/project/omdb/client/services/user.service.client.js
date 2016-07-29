@@ -9,18 +9,20 @@
         var api =  {
             findUserByCredentials: findUserByCredentials,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            logout: logout
         };
+
+        function logout() {
+            return $http.post("/api/project/logout");
+        }
 
         function getCurrentUser() {
             return $http.get("/api/project/loggedin");
         }
 
-        return api;
-
         function setCurrentUser(user) {
             $rootScope.currentUser = user;
-            console.log($rootScope.currentUser);
         }
 
         function findUserByCredentials(credentials) {

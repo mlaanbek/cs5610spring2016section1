@@ -6,6 +6,7 @@ module.exports = function(app, model) {
     // an end-points that is listening for incoming patterns
     app.post("/api/project/login", findUserByCredentials);
     app.get("/api/project/loggedin", loggedin);
+    app.post("/api/project/logout", logout);
 
     function findUserByCredentials(req, res) {
         var credentials = req.body;
@@ -22,5 +23,12 @@ module.exports = function(app, model) {
     function loggedin(req, res) {
         // the value can be either null or a user object
         res.json(req.session.currentUser);
+    }
+
+    function logout(req, res) {
+        // this actually too much, since at the moment we're destroying the session for everybody
+        // not just for the current user
+        req.session.destroy();
+        res.send(200);
     }
 }

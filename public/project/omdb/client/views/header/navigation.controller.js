@@ -20,8 +20,12 @@
         init();
 
         function logout() {
-            UserService.setCurrentUser(null);
-            $location.url("/home");
+            UserService
+                .logout()
+                .then(function() {
+                    UserService.setCurrentUser(null);
+                    $location.url("/home");
+                });
         }
     }
 })();
