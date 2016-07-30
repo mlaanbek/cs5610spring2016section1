@@ -3,13 +3,16 @@
         .module("OmdbApp")
         .controller("DetailsController", DetailsController);
 
-    function DetailsController($routeParams) {
+    function DetailsController($routeParams, OmdbService) {
         var vm = this;
         var imdbID = $routeParams.imdbID;
-        console.log(imdbID);
 
         function init() {
-            console.log("Details Controller");
+            OmdbService
+                .findMovieByImdbID(imdbID)
+                .then(function (response) {
+                    console.log(response.data);
+                });
         }
         init();
     }
