@@ -14,6 +14,8 @@
             })
             .when("/search", {
                 templateUrl: "views/search/search.view.html",
+                controller: "SearchController",
+                controllerAs: "model",
                 resolve: {
                     getLoggedIn: getLoggedIn
                 }
