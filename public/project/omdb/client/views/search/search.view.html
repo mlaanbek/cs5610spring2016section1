@@ -31,7 +31,11 @@
                     <img ng-src="{{movie.Poster}}"
                         height="100px"/>
                 </td>
-                <td>{{movie.Title}}</td>
+                <td>
+                    <a href="#/details/{{movie.imdbID}}">
+                        {{movieTitle}}
+                    </a>
+                </td>
                 <td>{{movie.imdbID}}</td>
             </tr>
         </tbody>
