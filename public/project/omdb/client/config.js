@@ -6,10 +6,17 @@
     function configuration($routeProvider) {
         $routeProvider
             .when("/home", {
-                templateUrl: "views/home/home.view.html"
+                templateUrl: "views/home/home.view.html",
+                // we need a session information (for example if there is a specific content for the user)
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
             })
             .when("/search", {
-                templateUrl: "views/search/search.view.html"
+                templateUrl: "views/search/search.view.html",
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
             })
             .when("/login", {
                 templateUrl: "views/login/login.view.html",
@@ -76,6 +83,23 @@
         /*
             Return the promise in that (deferred) object
           */
+        return deferred.promise;
+    }
+
+
+    function getLoggedIn(UserService, $q) {
+        var deferred = $q.defer();
+
+        UserService
+            .getCurrentUser()
+            .then(function (response) {
+                var currentUser = response.data;
+                UserService.setCurrentUser(currentUser);
+                // we always resolve whether there is a current user or not
+                // but home page will know what to do through UserService.setCurrentUser()
+                deferred.resolve();
+            });
+
         return deferred.promise;
     }
 })();
