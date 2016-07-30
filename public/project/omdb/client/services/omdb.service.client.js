@@ -3,14 +3,14 @@
         .module("OmdbApp")
         .factory("OmdbService", OmdbService);
     
-    function OmdbService() {
+    function OmdbService($http) {
         var api = {
             searchMovieByTitle: searchMovieByTitle
         };
         return api;
         
         function searchMovieByTitle(title) {
-            console.log(title);
+            return $http.get("http://www.omdbapi.com/?s=" + title);
         }
     }
 })();
