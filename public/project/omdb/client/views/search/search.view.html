@@ -15,7 +15,7 @@
 
     ng-if - content is not even in the DOM. Thus ng-if does not overburden the DOM
 -->
-<div ng-if="model-data">
+<div ng-if="model.data">
     <h3>Search Results</h3>
     <table class="table table-striped">
         <thead>
@@ -33,7 +33,7 @@
                 </td>
                 <td>
                     <a href="#/details/{{movie.imdbID}}">
-                        {{movieTitle}}
+                        {{movie.Title}}
                     </a>
                 </td>
                 <td>{{movie.imdbID}}</td>
