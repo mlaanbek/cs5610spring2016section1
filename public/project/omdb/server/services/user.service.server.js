@@ -13,7 +13,12 @@ module.exports = function(app, movieModel, userModel) {
     function profile(req, res) {
         var userId = req.params.userId;
         var user = userModel.findUserById(userId);
-        console.log(user);
+        var movieImdbIDs = user.likes;
+        var movies = movieModel.findMoviesByImdbIDs(movieImdbIDs);
+
+        // add a property of likesMovies
+        user.likesMovies = movies;
+        res.json(user);
     }
 
     function register(req, res) {
