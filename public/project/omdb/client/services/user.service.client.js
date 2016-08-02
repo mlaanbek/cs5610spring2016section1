@@ -11,9 +11,14 @@
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             createUser: createUser,
-            logout: logout
+            logout: logout,
+            getProfile: getProfile
         };
         return api;
+
+        function getProfile() {
+            console.log($rootScope.currentUser._id);
+        }
 
         function createUser(user) {
             return $http.post("/api/project/omdb/register", user);
