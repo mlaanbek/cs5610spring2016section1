@@ -1,7 +1,7 @@
 // A service is an interface between the object world and http world. It receives the http request
 // and passes it over to the server. A data model is responsible for manipulating data.
 
-module.exports = function(app, model) {
+module.exports = function(app, movieModel, userModel) {
 
     // an end-points that is listening for incoming patterns
     app.post("/api/project/omdb/login", login);
@@ -12,13 +12,13 @@ module.exports = function(app, model) {
 
     function profile(req, res) {
         var userId = req.params.userId;
-        var user = model.findUserById(userId);
+        var user = userModel.findUserById(userId);
         console.log(user);
     }
 
     function register(req, res) {
         var user = req.body;
-        user = model.createUser(user);
+        user = userModel.createUser(user);
         // let's log the user automatically in
         req.session.currentUser = user;
         res.json(user);
@@ -26,7 +26,7 @@ module.exports = function(app, model) {
 
     function login(req, res) {
         var credentials = req.body;
-        var user = model.findUserByCredentials(credentials);
+        var user = userModel.findUserByCredentials(credentials);
 
         // update req.session object. This object can remember between different requests
         // Now that we have an user, we store it as a key-value pair in a session object. Thus a session object is basically a hash table
