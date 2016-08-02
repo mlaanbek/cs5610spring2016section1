@@ -2,12 +2,13 @@ module.exports = function (app, movieModel, userModel) {
     app.post("/api/project/user/:userId/movie/:imdbID", userLikesMovie);
 
     function userLikesMovie(req, res) {
+        var movieOmdb = req.body;
         var userId = req.params.userId;
-        var imdbId = req.params.imdbID;
+        var imdbID = req.params.imdbID;
 
-        var movie = movieModel.findMovieByImdbID(imdbId);
+        var movie = movieModel.findMovieByImdbID(imdbID);
         if (!movie) {
-            movie = movieModel.createMovie(imdbId);
+            movie = movieModel.createMovie(movieOmdb);
         }
 
         // if a movie does not have any likes
