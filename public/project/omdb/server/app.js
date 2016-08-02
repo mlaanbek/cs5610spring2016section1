@@ -4,6 +4,7 @@
 module.exports = function(app) {
 
     // load the model and pass it to the service
-    var model = require("./models/user.model.server.js")();
-    var service = require("./services/user.service.server.js")(app, model);
+    var userModel = require("./models/user.model.server.js")();
+    var userService = require("./services/user.service.server.js")(app, userModel);
+    var movieService = require("./services/movie.service.server.js")(app);
 }
