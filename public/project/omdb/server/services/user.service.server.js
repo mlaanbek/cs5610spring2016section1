@@ -4,7 +4,7 @@
 module.exports = function(app, model) {
 
     // an end-points that is listening for incoming patterns
-    app.post("/api/project/login", findUserByCredentials);
+    app.post("/api/project/login", login);
     app.get("/api/project/loggedin", loggedin);
     app.post("/api/project/logout", logout);
     app.post("/api/project/register", register);
@@ -17,7 +17,7 @@ module.exports = function(app, model) {
         res.json(user);
     }
 
-    function findUserByCredentials(req, res) {
+    function login(req, res) {
         var credentials = req.body;
         var user = model.findUserByCredentials(credentials);
 
