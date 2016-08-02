@@ -3,7 +3,12 @@
         .module("OmdbApp")
         .controller("DetailsController", DetailsController);
 
-    function DetailsController($routeParams, OmdbService, $rootScope, $location) {
+    function DetailsController($routeParams,
+                               OmdbService,
+                               $rootScope,
+                               $location,
+                               MovieService
+    ) {
         var vm = this;
         var imdbID = $routeParams.imdbID;
         var currentUser = $rootScope.currentUser;
@@ -20,7 +25,8 @@
 
         function favorite(imdbDB) {
             if (currentUser) {
-                console.log([currentUser.username, imdbDB]);
+                MovieService
+                    .setUserLikesMovie(currentUser._id, imdbDB);
             } else {
                 $location.url("/login");
             }
