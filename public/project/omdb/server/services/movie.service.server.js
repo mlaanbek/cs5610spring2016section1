@@ -6,6 +6,15 @@ module.exports = function (app, movieModel) {
         var imdbId = req.params.imdbID;
 
         var movie = movieModel.findMovieByImdbID(imdbId);
+        if (movie) {
+            // if a movie does not have any likes
+            if (!movie.likes) {
+                movie.likes = [];
+            }
+            movie.likes.push(userId);
+        }
+
+
         console.log([userId, imdbId, movie]);
         res.send(200);
     }
