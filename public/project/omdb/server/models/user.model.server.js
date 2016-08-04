@@ -1,7 +1,7 @@
 // load the mock data into a local variable
 var mock = require("./user.mock.json");
 
-module.exports = function () {
+module.exports = function (db, mongoose) {
     var api = {
         findUserByCredentials: findUserByCredentials,
         createUser: createUser,

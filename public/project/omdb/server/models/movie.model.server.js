@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function (db, mongoose) {
     var movies = [];
     var api = {
         findMovieByImdbID: findMovieByImdbID,

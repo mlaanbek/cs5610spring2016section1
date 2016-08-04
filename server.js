@@ -58,6 +58,6 @@ app.get('/api/users', function(req, res) {
 require("./public/experiments/server/express/omdb/get/server/app.js")(app);
 require("./public/experiments/server/express/omdb/post/server/app.js")(app);
 
-require("./public/project/omdb/server/app.js")(app);
+require("./public/project/omdb/server/app.js")(app, db, mongoose);
 
 app.listen(port, ipaddress);
