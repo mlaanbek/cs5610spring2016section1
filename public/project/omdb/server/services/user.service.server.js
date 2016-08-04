@@ -12,6 +12,8 @@ module.exports = function(app, movieModel, userModel) {
 
     function profile(req, res) {
         var userId = req.params.userId;
+
+        /*
         var user = userModel.findUserById(userId);
         var movieImdbIDs = user.likes;
         var movies = movieModel.findMoviesByImdbIDs(movieImdbIDs);
@@ -19,6 +21,18 @@ module.exports = function(app, movieModel, userModel) {
         // add a property of likesMovies
         user.likesMovies = movies;
         res.json(user);
+        */
+
+        var user = userModel.findUserById(userId)
+            .then(
+                // return user if promise resolved
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function register(req, res) {
