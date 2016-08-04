@@ -1,6 +1,9 @@
 // load the mock data into a local variable
 var mock = require("./user.mock.json");
 
+// load q promise library
+var q = require("q");
+
 module.exports = function (db, mongoose) {
 
     var UserSchema = require("./user.schema.server.js")(mongoose);
@@ -32,6 +35,9 @@ module.exports = function (db, mongoose) {
         return user;
         */
 
+        // use q to defer the response. It's an object that includes a promise.
+        var deferred = q.defer();
+
         // insert new user with mongoose user model's create().
         // The user object will be validated against the schema.
 
@@ -42,8 +48,19 @@ module.exports = function (db, mongoose) {
 
         // MongoDB will create a unique ID (a primary key) plus it will add several other things.
         UserModel.create(user, function (err, doc) {
-           console.log(doc);
+            console.log(doc);
+
+            if (err) {
+                // reject the promise if error
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
         });
+
+        // return a promise immediately. And when the response comes, we will be notified through that promise.
+        // A promise allows us to register functions - a success function and a failure function.
+        return deferred.promise;
     }
 
     function findUserByCredentials(credentials) {
