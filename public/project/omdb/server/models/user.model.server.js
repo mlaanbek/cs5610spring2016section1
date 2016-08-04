@@ -5,6 +5,10 @@ module.exports = function (db, mongoose) {
 
     var UserSchema = require("./user.schema.server.js")(mongoose);
 
+    // create user model from schema. This model provides us with the API
+    // to interact with the database
+    var UserModel = mongoose.model('User', UserSchema);
+
     var api = {
         findUserByCredentials: findUserByCredentials,
         createUser: createUser,
