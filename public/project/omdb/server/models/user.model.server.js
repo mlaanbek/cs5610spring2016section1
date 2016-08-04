@@ -26,9 +26,24 @@ module.exports = function (db, mongoose) {
     }
 
     function createUser(user) {
+        /*
         user._id = "ID_" + (new Date()).getTime();
         mock.push(user);
         return user;
+        */
+
+        // insert new user with mongoose user model's create().
+        // The user object will be validated against the schema.
+
+        // It's an asynchronous call, Node.js sends the command to the database and continues
+        // (it won't wait for the response). The communication is thus implemented through events.
+        // Node.js will be notified with a callback which can be either an error (err) or actual
+        // instance object that made it to the database (doc).
+
+        // MongoDB will create a unique ID (a primary key) plus it will add several other things.
+        UserModel.create(user, function (err, doc) {
+           console.log(doc);
+        });
     }
 
     function findUserByCredentials(credentials) {
