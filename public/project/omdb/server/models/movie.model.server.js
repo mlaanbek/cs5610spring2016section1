@@ -107,7 +107,7 @@ module.exports = function (db, mongoose) {
     function findMovieByImdbID(imdbID) {
         var deferred = q.defer();
         
-        Movie.findById(imdbID, function (err, doc) {
+        Movie.findOne({imdbID: imdbID}, function (err, doc) {
            if (err) {
                deferred.reject(err);
            } else {
