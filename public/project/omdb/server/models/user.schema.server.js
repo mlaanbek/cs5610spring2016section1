@@ -8,7 +8,8 @@ module.exports = function(mongoose) {
         firstName: String,
         lastName: String,
         email: String,
-        roles: [String]
+        roles: [String],
+        likes: [String]
 
         // the second argument allows to do additional settings to the schema
         // in this case "what do we want to call the collection".

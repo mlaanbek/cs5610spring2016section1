@@ -4,6 +4,7 @@ module.exports = function (mongoose) {
         imdbID: String,
         title: String,
         poster: String,
+        likes: [String]
         // store movie collection in this collection
     }, {collection: 'project.omdb.movie'});
 
