@@ -63,14 +63,26 @@ module.exports = function (db, mongoose) {
     }
 
     function findMoviesByImdbIDs(imdbIDs) {
-        var movies = [];
-        for (var id in imdbIDs) {
-            var movie = findMovieByImdbID(imdbIDs[id]);
-            if (movie) {
-                movies.push(movie);
+        var deferred = q.defer();
+
+        /*
+            Find all movies
+            whose imdb IDs
+            are in imdbIDs array
+
+            .find always returns an array
+         */
+        Movie.find({
+            // $in - all operators in mongoose use a $sign in front of then
+            imdbID: {$in: imdbIDs}
+        }, function (err, movies) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(movies);
             }
-        }
-        return movies;
+        });
+        return deferred.promise;
     }
 
     function createMovie(movie) {

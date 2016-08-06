@@ -12,23 +12,33 @@ module.exports = function(app, movieModel, userModel) {
 
     function profile(req, res) {
         var userId = req.params.userId;
+        var user = null;
 
-        /*
-        var user = userModel.findUserById(userId);
-        var movieImdbIDs = user.likes;
-        var movies = movieModel.findMoviesByImdbIDs(movieImdbIDs);
-
-        // add a property of likesMovies
-        user.likesMovies = movies;
-        res.json(user);
-        */
-
-        var user = userModel.findUserById(userId)
+        userModel.findUserById(userId)
             .then(
-                // return user if promise resolved
+                // first retrieve the user
                 function (doc) {
-                    res.json(doc);
+                    user = doc;
+                    // fetch movies this user likes
+                    return movieModel.findMoviesByImdbIDs(doc.likes);
                 },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                // fetch movies this user likes
+                function (movies) {
+                    /*
+                        List of movies this user likes
+                        movies are not stored in database
+                        only added for UI rendering
+                     */
+                    user.likesMovies = movies;
+                    res.json(user);
+                },
+
+                // send error if promise rejected
                 function (err) {
                     res.status(400).send(err);
                 }
