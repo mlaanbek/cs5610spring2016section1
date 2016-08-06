@@ -77,6 +77,8 @@ module.exports = function (db, mongoose) {
     }
 
     function findUserByCredentials(credentials) {
+
+        /*
         for (var u in mock) {
             if (mock[u].username === credentials.username &&
                 mock[u].password === credentials.password) {
@@ -85,5 +87,26 @@ module.exports = function (db, mongoose) {
         }
 
         return null;
+        */
+
+        var deferred = q.defer();
+
+        // find one retrieves one document
+        UserModel.findOne(
+            // first argument is predicate; if predicate is not provided all users will be retrieved
+            {username: credentials.username,
+            password: credentials.password},
+
+            // doc is unique instance that matches predicate
+            function (err, doc) {
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
+                }
+            }
+        );
+
+        return deferred.promise;
     }
 }

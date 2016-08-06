@@ -62,14 +62,18 @@ module.exports = function(app, movieModel, userModel) {
 
     function login(req, res) {
         var credentials = req.body;
-        var user = userModel.findUserByCredentials(credentials);
-
-        // update req.session object. This object can remember between different requests
-        // Now that we have an user, we store it as a key-value pair in a session object. Thus a session object is basically a hash table
-        req.session.currentUser = user;
-        //res.send(200);
-
-        res.json(user);
+        var user = userModel.findUserByCredentials(credentials)
+            .then(
+                function (doc) {
+                    // update req.session object. This object can remember between different requests
+                    // Now that we have an user, we store it as a key-value pair in a session object. Thus a session object is basically a hash table
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
     }
 
     function loggedin(req, res) {
