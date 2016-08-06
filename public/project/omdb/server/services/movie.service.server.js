@@ -7,24 +7,29 @@ module.exports = function (app, movieModel, userModel) {
         var imdbID = req.params.imdbID;
 
         var movie = movieModel.findMovieByImdbID(imdbID);
+
         if (!movie) {
-            movie = movieModel.createMovie(movieOmdb);
-        }
+            movie = movieModel.createMovie(movieOmdb)
+                .then(
+                    function (movie) {
+                        if (!movie.likes) {
+                            movie.likes = [];
+                        }
+                        movie.likes.push(userId);
 
-        // if a movie does not have any likes
-        if (!movie.likes) {
-            movie.likes = [];
+                        var user = userModel.findUserById(userId);
+                        if (!user.likes) {
+                            user.likes = [];
+                        }
+                        user.likes.push(imdbID);
+                        console.log(movie);
+                        console.log(user);
+                        res.send(200);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
         }
-
-        movie.likes.push(userId);
-
-        var user = userModel.findUserById(userId);
-        if (!user.likes) {
-            user.likes = [];
-        }
-        user.likes.push(imdbId);
-        console.log(user);
-        console.log(movie);
-        res.send(200);
     }
 }
