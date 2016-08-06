@@ -11,7 +11,19 @@ module.exports = function (app, movieModel, userModel) {
             .userLikesMovie(userId, movieOmdb)
             .then(
                 function (movie) {
-                    res.json(movie);
+
+                    // notify the user what movie she likes
+                    // this returns also a promise which will be evaluted in the next .then section
+                    return userModel.userLikesMovie(userId, movie);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            // add movie to user likes
+            .then(
+                function (user) {
+                    res.json(user);
                 },
                 function (err) {
                     res.status(400).send(err);

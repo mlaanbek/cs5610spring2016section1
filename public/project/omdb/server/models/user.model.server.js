@@ -15,9 +15,38 @@ module.exports = function (db, mongoose) {
     var api = {
         findUserByCredentials: findUserByCredentials,
         createUser: createUser,
-        findUserById: findUserById
+        findUserById: findUserById,
+        findUserByIds: findUserByIds,
+        userLikesMovie: userLikesMovie
     };
     return api;
+    
+    // add movie to user likes
+    function userLikesMovie(userId, movie) {
+        var deferred = q.defer();
+        
+        // find the user
+        UserModel.findById(userId, function (err, doc) {
+           if (err) {
+               deferred.reject(err);
+           } else {
+               // add movie id to user likes
+               doc.likes.push(movie.imdbID);
+
+               // save user
+               doc.save(function (err, doc) {
+                   if (err) {
+                       deferred.reject(err);
+                   } else {
+                       // resolve promise with user
+                       deferred.resolve(doc);
+                   }
+               });
+           }
+        });
+
+        return deferred;
+    }
 
     function findUserById(userId) {
 
