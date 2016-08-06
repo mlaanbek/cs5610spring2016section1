@@ -48,6 +48,22 @@ module.exports = function (db, mongoose) {
         return deferred;
     }
 
+    function findUserByIds(userIds) {
+        var deferred = q.defer();
+
+        // find all users in array of user IDs
+        UserModel.find({
+            _id: {$in: userIds}
+        }, function (err, users) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(users);
+            }
+        });
+        return deferred.promise;
+    }
+
     function findUserById(userId) {
 
         /*
