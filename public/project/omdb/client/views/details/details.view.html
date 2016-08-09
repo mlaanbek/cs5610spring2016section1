@@ -10,7 +10,10 @@
 
 <button class="btn btn-primary"
         ng-click="model.favorite(model.data)">
-    <span class="glyphicon glyphicon-start-empty"></span>
+    <span ng-show="model.movie.likes.indexOf(currentUser._id) > -1"
+        class="glyphicon glyphicon-star"></span>
+    <span ng-show="!model.movie || !model.movie.likes || model.movie.likes.indexOf(currentUser._id) == -1"
+        class="glyphicon glyphicon-star-empty"></span>
 </button>
 
 <h4>Plot</h4>
