@@ -10,7 +10,12 @@ module.exports = function (app, movieModel, userModel) {
             .then(
                 function (doc) {
                     movie = doc;
-                    return userModel.findUsersByIds(movie.likes);
+                    if (doc) {
+                        return userModel.findUsersByIds(movie.likes);
+                    } else {
+                        res.json({});
+                    }
+
                 },
                 function (err) {
                     res.status(400).send(err);
